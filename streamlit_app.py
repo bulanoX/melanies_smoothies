@@ -25,6 +25,9 @@ st.write("The name on your Smoothie will be:",name_on_order)
 import requests 
 ingredients_list = st.multiselect('Choose up to 5 ingredients', my_dataframe, max_selections=5)
 ingredients_string=''
+
+time_to_instert=st.button('Submit Order')
+
 if ingredients_list and len(ingredients_list)<6:
     #st.write(ingredients_list)
     #st.text(ingredients_list)
@@ -42,7 +45,7 @@ if ingredients_list and len(ingredients_list)<6:
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
             values ('""" + ingredients_string + """','""" + name_on_order + """')"""
     
-    time_to_instert=st.button('Submit Order')
+   
     #st.write(my_insert_stmt)
     if time_to_instert:
         session.sql(my_insert_stmt).collect()
